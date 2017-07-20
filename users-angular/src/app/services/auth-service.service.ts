@@ -9,6 +9,7 @@ export class AuthServiceService {
     private httpThang: Http
   ) { }
 
+// POST signup
 // an argument for each "req.body" in the API route
 signup(theFullName, theEmail, thePassword) {
   return this.httpThang
@@ -28,8 +29,51 @@ signup(theFullName, theEmail, thePassword) {
   .then(res => res.json())
   }
 
-  // POST signup
+
   // POST login
+  login(theEmail, thePassword) {
+    return this.httpThang
+    .post(
+      "http://localhost:3000/api/login",
+      {
+        blahEmail: theEmail,
+        blahPassword: thePassword
+      },
+      {withCredentials: true}
+    )
+    // convert from observable to promise
+    .toPromise()
+    // parse the JSON
+    .then(res => res.json());
+  }
+
+
   // POST logout
+  logout() {
+    return this.httpThang
+    .post(
+      "http://localhost:3000/api/logout",
+
+      {},
+
+      {withCredentials: true}
+    )
+    .toPromise()
+
+    .then(res => res.json());
+  }
+
   // GET checklogin
+  checklogin () {
+return this.httpThang
+.get(
+  "http://localhost:3000/api/checklogin",
+
+  {withCredentials: true}
+)
+
+.toPromise()
+.then(res =>res.json());
+
+}
 }
